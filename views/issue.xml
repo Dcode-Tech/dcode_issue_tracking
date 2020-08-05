@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record model="ir.ui.view" id="issue_main_form">
+        <field name="name">Issue Form</field>
+        <field name="model">issue.issue</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+<!--                    <button string="Confirm" type="object" name="action_confirm"-->
+<!--                            states="draft" class="oe_highlight" />-->
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+<!--                    <separator string="General" colspan="2" />-->
+                    <group colspan="2" col="2">
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                    <group colspan="2" col="2">
+                        <field name="user_ids" widget="many2many_tags"/>
+                        <field name="category_id"/>
+                    </group>
+                    <group colspan="2" col="2">
+                        <field name="last_checked"/>
+                        <field name="communication_ids" widget="many2many_list">
+                            <tree editable="bottom">
+                                <field name="channel_id"/>
+                                <field name="identifier"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="main_issue_action">
+            <field name="name">Issues</field>
+            <field name="res_model">issue.issue</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create the first Issue
+                </p>
+            </field>
+        </record>
+
+    <menuitem
+            id="issue_menu_root"
+            name="Issues"
+    />
+
+    <menuitem
+        id="issue_menu"
+        name="Issues"
+        parent="issue_menu_root"
+        action="main_issue_action"
+    />
+</odoo>

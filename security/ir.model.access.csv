@@ -1,0 +1,6 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_issue_issue,access_issue_issue,model_issue_issue,,1,1,1,1
+access_issue_category,access_issue_category,model_issue_category,,1,1,1,1
+access_issue_category_color,access_issue_category_color,model_issue_category_color,,1,1,1,1
+access_issue_communication,access_issue_communication,model_issue_communication,,1,1,1,1
+access_issue_communication_channel,access_issue_communication_channel,model_issue_communication_channel,,1,1,1,1
