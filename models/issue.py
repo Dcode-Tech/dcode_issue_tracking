@@ -41,16 +41,18 @@ class IssueCategory(models.Model):
     _name = 'issue.category'
     _description = 'Different Categories for Issues'
 
-    name = fields.Char()
+    name = fields.Char(compute='_compute_name')
+    category = fields.Char(string='Category')
     color_id = fields.Many2one(
         'issue.category.color',
         string='Color',
     )
 
-    @api.onchange('color_id')
+    @api.depends('color_id', 'category')
     @api.multi
     def _compute_name(self):
-        self.name = f'{self.name.split("-")[0]} - {self.color_id.name}'
+        for category in self:
+            category.name = f'{category.category} - {category.color_id.name}'
 
 
 class IssueCategoryColor(models.Model):
